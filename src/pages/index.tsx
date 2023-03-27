@@ -1,7 +1,7 @@
 import { styled } from "../styles";
 
 const Button = styled("button", {
-  backgroundColor: "$rocket",
+  backgroundColor: "$green500",
   borderRadius: 6,
   border: 0,
   padding: "4px 8px",
@@ -17,12 +17,9 @@ const Button = styled("button", {
 
 export default function Home() {
   return (
-    <>
-      <h1>Hello world</h1>
-      <Button>
-        <span>dale</span>
-        teste
-      </Button>
-    </>
+    <Button>
+      <span>dale</span>
+      teste
+    </Button>
   );
 }
