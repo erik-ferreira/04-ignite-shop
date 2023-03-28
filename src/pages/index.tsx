@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { GetServerSideProps } from "next";
 import { useKeenSlider } from "keen-slider/react";
 
 import shirt1 from "../assets/camisetas/1.png";
@@ -9,7 +10,7 @@ import shirt4 from "../assets/camisetas/4.png";
 import "keen-slider/keen-slider.min.css";
 import { HomeContainer, Product } from "../styles/pages/home";
 
-export default function Home() {
+export default function Home({ list }) {
   const [sliderRef] = useKeenSlider({
     slides: {
       perView: 3,
@@ -19,6 +20,8 @@ export default function Home() {
 
   return (
     <HomeContainer ref={sliderRef} className="keen-slider">
+      {JSON.stringify(list)}
+
       <Product className="keen-slider__slide">
         <Image src={shirt1} width={520} height={480} alt="" />
 
@@ -57,3 +60,11 @@ export default function Home() {
     </HomeContainer>
   );
 }
+
+export const getServerSideProps = () => {
+  return {
+    props: {
+      list: [1, 2, 3],
+    },
+  };
+};
