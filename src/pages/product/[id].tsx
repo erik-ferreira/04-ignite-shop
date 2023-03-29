@@ -14,17 +14,23 @@ import {
 } from "../../styles/pages/product";
 
 interface ProductProps {
-  product: {
-    id: string;
-    name: string;
-    imageUrl: string;
-    price: string;
-    description: string;
-    defaultPriceId: string;
-  };
+  id: string;
+  name: string;
+  imageUrl: string;
+  price: string;
+  description: string;
+  defaultPriceId: string;
 }
 
-export default function Product({ product }: ProductProps) {
+interface ProductPageProps {
+  product: ProductProps;
+  productNotFound: boolean;
+}
+
+export default function Product({
+  product,
+  productNotFound,
+}: ProductPageProps) {
   const { isFallback } = useRouter();
   const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] =
     useState(false);
@@ -47,6 +53,10 @@ export default function Product({ product }: ProductProps) {
 
   if (isFallback) {
     return <p>Loading...</p>;
+  }
+
+  if (productNotFound) {
+    return <p>Produto não encontrado</p>;
   }
 
   return (
@@ -79,29 +89,37 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps<any, { id: string }> = async ({
   params,
 }) => {
-  const productId = params.id;
+  let product = {} as ProductProps;
 
-  const productStripe = await stripe.products.retrieve(productId, {
-    expand: ["default_price"],
-  });
+  try {
+    const productId = params.id;
 
-  const defaultPrice = productStripe.default_price as Stripe.Price;
-  const price = new Intl.NumberFormat("pt-BR", {
-    style: "currency",
-    currency: "BRL",
-  }).format(defaultPrice.unit_amount / 100);
+    const productStripe = await stripe.products.retrieve(productId, {
+      expand: ["default_price"],
+    });
 
-  const product = {
-    id: productStripe.id,
-    name: productStripe.name,
-    imageUrl: productStripe.images[0],
-    price,
-    defaultPriceId: defaultPrice.id,
-    description: productStripe.description,
-  };
+    const defaultPrice = productStripe.default_price as Stripe.Price;
+    const price = new Intl.NumberFormat("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    }).format(defaultPrice.unit_amount / 100);
+
+    product = {
+      id: productStripe.id,
+      name: productStripe.name,
+      imageUrl: productStripe.images[0],
+      price,
+      defaultPriceId: defaultPrice.id,
+      description: productStripe.description,
+    };
+  } catch (err) {
+    return {
+      props: { product, productNotFound: true },
+    };
+  }
 
   return {
-    props: { product },
+    props: { product, productNotFound: false },
     revalidate: 60 * 60 * 1, // 1 hour
   };
 };
