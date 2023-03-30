@@ -12,6 +12,8 @@ import {
   ImageContainer,
   ProductContainer,
   ProductDetails,
+  ProductSkeletonContainer,
+  ProductSkeletonDetails,
 } from "../../styles/pages/product";
 
 interface ProductProps {
@@ -53,7 +55,18 @@ export default function Product({
   }
 
   if (isFallback) {
-    return <p>Loading...</p>;
+    return (
+      <ProductSkeletonContainer>
+        <div />
+
+        <ProductSkeletonDetails>
+          <div />
+          <div />
+
+          <div />
+        </ProductSkeletonDetails>
+      </ProductSkeletonContainer>
+    );
   }
 
   if (productNotFound) {

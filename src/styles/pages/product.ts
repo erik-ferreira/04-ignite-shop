@@ -70,3 +70,45 @@ export const ProductDetails = styled("div", {
     },
   },
 });
+
+export const ProductSkeletonContainer = styled("div", {
+  display: "grid",
+  gridTemplateColumns: "1fr 1fr",
+  alignItems: "stretch",
+  gap: "4rem",
+  maxWidth: 1180,
+  margin: "0 auto",
+
+  "> div:first-child": {
+    minWidth: 576,
+    width: "100%",
+    height: "calc(656px - 0.5rem)",
+    backgroundColor: "$gray800",
+    borderRadius: 8,
+  },
+});
+
+export const ProductSkeletonDetails = styled("div", {
+  display: "flex",
+  flexDirection: "column",
+
+  "> div": {
+    width: "100%",
+    backgroundColor: "$gray800",
+    borderRadius: 8,
+
+    "&:first-child": {
+      height: "4.75rem",
+    },
+
+    "&:nth-child(2)": {
+      marginTop: "2.5rem",
+      height: "8rem",
+    },
+
+    "&:last-child": {
+      marginTop: "auto",
+      height: "3.875rem",
+    },
+  },
+});
