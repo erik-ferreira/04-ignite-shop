@@ -13,10 +13,4 @@ export const Header = styled("header", {
   width: "100%",
   padding: "2rem 0",
   margin: "0 auto",
-
-  // img: {
-  //   "@media screen and (max-width: 1240px)": {
-  //     marginLeft: "2rem",
-  //   },
-  // },
 });
