@@ -3,6 +3,8 @@ import { styled } from "..";
 export const SuccessContainer = styled("main", {
   height: 656,
   margin: "0 auto",
+  border: "1px solid red",
+  padding: "1rem",
 
   display: "flex",
   alignItems: "center",
@@ -33,6 +35,20 @@ export const SuccessContainer = styled("main", {
 
     "&:hover": {
       color: "$green300",
+    },
+  },
+
+  "@media screen and (max-width: 700px)": {
+    h1: {
+      fontSize: "$xl",
+    },
+
+    p: {
+      fontSize: "$lg",
+    },
+
+    a: {
+      fontSize: "$md",
     },
   },
 });

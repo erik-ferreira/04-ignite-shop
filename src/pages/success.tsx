@@ -15,7 +15,7 @@ interface SuccessProps {
     imageUrl: string;
   };
 }
-
+// http://localhost:3000/success?session_id=cs_test_a1f1fzWMITx8FCTpJ8Gd8AjgR8TsLtaZr8qFQcEjkFg26s9jadrr97xdzn
 export default function Success({ customerName, product }: SuccessProps) {
   return (
     <>
