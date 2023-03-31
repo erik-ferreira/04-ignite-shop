@@ -1,38 +1,39 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<p>
+    <img src=".github/ignite-shop.png" width="100%">
+</p>
 
-## Getting Started
+## :computer: Projeto
 
-First, run the development server:
+Este é um projeto feito durante o Projeto 04 do Ignite da Rocketseat, onde pude construir uma conexão com stripe para buscar os produtos(camisetas) e realizar o checkout de pagamento.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+## :rocket: Tecnologias
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- [React](https://reactjs.org)
+- [Typescript](https://www.typescriptlang.org)
+- [Stitches JS](stitches.dev)
+- [Keen Slider](https://keen-slider.io)
+- [Stripe](https://stripe.com/br)
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## :thinking: Como rodar o projeto?
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+1. Execute `npm i` para instalar as dependências
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+2. Configurações no [stripe](https://dashboard.stripe.com/test/dashboard):
+   2.1 Crie uma conta e crie um projeto Ignite Shop(ou outro nome de sua preferência)
+   2.2 Vá em **Produtos** e adicione alguns produtos com `imagens, descrição e preço`. Se preferir usar as imagens das camisetas, basta ir em `src > assets > camisetas` aqui mesmo no github.
+   2.3 Volte na página inicial do stripe e va em `Desenvolvedores > Chaves da API`. Na raiz do projeto crie um arquivo `.env.local`, e salve a chave pública e secreta da seguinte forma:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+   ```env
+    # App
+    NEXT_URL=http://localhost:3000 <- adicione essa linha também
 
-## Learn More
+    # Stripe
+    STRIPE_PUBLIC_KEY=sua_chave_publica
+    STRIPE_SECRET_KEY=sua_chave_secreta
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+3. Execute `npm run dev` para rodar o projeto
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+4. [Abra o navegador na porta 3000](http://localhost:3000)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+5. Caso queira simular o pagamento, basta acessar essa [documentação do stripe](https://stripe.com/docs/testing#cards) para pegar um cartão válido para teste.
