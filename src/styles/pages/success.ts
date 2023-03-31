@@ -3,7 +3,6 @@ import { styled } from "..";
 export const SuccessContainer = styled("main", {
   height: 656,
   margin: "0 auto",
-  border: "1px solid red",
   padding: "1rem",
 
   display: "flex",
