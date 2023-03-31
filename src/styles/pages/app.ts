@@ -10,7 +10,7 @@ export const ContainerApp = styled("div", {
 
 export const Header = styled("header", {
   maxWidth: 1180,
-  width: "100%",
+  width: "96%",
   padding: "2rem 0",
   margin: "0 auto",
 });
