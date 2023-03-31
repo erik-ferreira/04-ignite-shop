@@ -26,6 +26,20 @@ export default function Home({ products }: HomeProps) {
       perView: 3,
       spacing: 48,
     },
+    breakpoints: {
+      "(max-width: 900px)": {
+        slides: {
+          perView: 2,
+          spacing: 48,
+        },
+      },
+      "(max-width: 425px)": {
+        slides: {
+          perView: 1.5,
+          spacing: 32,
+        },
+      },
+    },
   });
 
   return (
@@ -35,7 +49,7 @@ export default function Home({ products }: HomeProps) {
       </Head>
 
       <HomeContainer ref={sliderRef} className="keen-slider">
-        {products.map((product) => (
+        {products.map((product, index) => (
           <Product
             key={product.id}
             prefetch={false}

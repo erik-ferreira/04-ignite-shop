@@ -120,6 +120,7 @@ export const getStaticProps: GetStaticProps<any, { id: string }> = async ({
   params,
 }) => {
   let product = {} as ProductProps;
+  console.log("params", params);
 
   try {
     const productId = params.id;

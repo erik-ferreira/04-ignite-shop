@@ -7,6 +7,18 @@ export const HomeContainer = styled("main", {
   width: "100%",
   minHeight: 656,
   marginLeft: "auto",
+
+  "@media screen and (max-width: 1400px)": {
+    minHeight: 524.4,
+  },
+
+  "@media screen and (max-width: 900px)": {
+    minHeight: 392.8,
+  },
+
+  "@media screen and (max-width: 425px)": {
+    minHeight: 261.2,
+  },
 });
 
 export const Product = styled(Link, {
@@ -22,6 +34,21 @@ export const Product = styled(Link, {
 
   img: {
     objectFit: "cover",
+
+    "@media screen and (max-width: 1400px)": {
+      width: 416,
+      height: 384,
+    },
+
+    "@media screen and (max-width: 900px)": {
+      width: 312,
+      height: 288,
+    },
+
+    "@media screen and (max-width: 425px)": {
+      width: 208,
+      height: 192,
+    },
   },
 
   footer: {
@@ -52,6 +79,16 @@ export const Product = styled(Link, {
       fontSize: "$lg",
       fontWeight: "bold",
       color: "$green300",
+    },
+
+    "@media screen and (max-width: 950px)": {
+      flexDirection: "column",
+      gap: "1rem",
+      padding: "1rem",
+
+      strong: {
+        textAlign: "center",
+      },
     },
   },
 
