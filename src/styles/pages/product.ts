@@ -90,7 +90,6 @@ export const ProductDetails = styled("div", {
     borderRadius: 8,
     color: "$white",
     padding: "1.25rem",
-    cursor: "pointer",
     fontSize: "$md",
     fontWeight: "bold",
     transition: "backgroundColor 0.2s",
@@ -101,7 +100,6 @@ export const ProductDetails = styled("div", {
 
     "&:disabled": {
       opacity: 0.6,
-      cursor: "not-allowed",
     },
   },
 

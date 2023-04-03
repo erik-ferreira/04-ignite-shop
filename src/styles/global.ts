@@ -16,4 +16,12 @@ export const globalStyles = globalCss({
     fontFamily: "Roboto",
     fontWeight: 400,
   },
+
+  "button:not(:disabled):hover": {
+    cursor: "pointer",
+  },
+
+  "button:disabled": {
+    cursor: "not-allowed",
+  },
 });

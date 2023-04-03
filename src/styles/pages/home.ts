@@ -51,51 +51,76 @@ export const Product = styled(Link, {
     },
   },
 
-  footer: {
-    position: "absolute",
-    bottom: "0.25rem",
-    left: "0.25rem",
-    right: "0.25rem",
-    padding: "2rem",
-
-    borderRadius: 4,
-
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-
-    backgroundColor: "rgba(0, 0, 0, 0.6)",
-
-    transform: "translateY(110%)",
-    opacity: 0,
-    transition: "all 0.2s ease-in-out",
-
-    strong: {
-      fontSize: "$lg",
-      color: "$gray100",
-    },
-
-    span: {
-      fontSize: "$lg",
-      fontWeight: "bold",
-      color: "$green300",
-    },
-
-    "@media screen and (max-width: 950px)": {
-      flexDirection: "column",
-      gap: "1rem",
-      padding: "1rem",
-
-      strong: {
-        textAlign: "center",
-      },
-    },
-  },
-
   "&:hover": {
     footer: {
       transform: "translateY(0%)",
       opacity: 1,
     },
+  },
+});
+
+export const FooterProduct = styled("footer", {
+  position: "absolute",
+  bottom: "0.25rem",
+  left: "0.25rem",
+  right: "0.25rem",
+  padding: "2rem",
+
+  borderRadius: 4,
+
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+
+  backgroundColor: "rgba(0, 0, 0, 0.6)",
+
+  transform: "translateY(110%)",
+  opacity: 0,
+  transition: "all 0.2s ease-in-out",
+
+  div: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    gap: "0.25rem",
+  },
+
+  strong: {
+    fontSize: "$lg",
+    color: "$gray100",
+  },
+
+  span: {
+    fontSize: "$lg",
+    fontWeight: "bold",
+    color: "$green300",
+  },
+
+  "@media screen and (max-width: 950px)": {
+    flexDirection: "column",
+    gap: "1rem",
+    padding: "1rem",
+
+    strong: {
+      textAlign: "center",
+    },
+  },
+});
+
+export const ButtonCart = styled("button", {
+  backgroundColor: "$green300",
+  border: 0,
+  borderRadius: 6,
+  lineHeight: 0,
+  padding: "0.75rem",
+  color: "$white",
+  transition: "backgroundColor 0.2s",
+
+  "&:not(:disabled):hover": {
+    backgroundColor: "$green500",
+  },
+
+  "&:disabled": {
+    opacity: 0.6,
   },
 });
