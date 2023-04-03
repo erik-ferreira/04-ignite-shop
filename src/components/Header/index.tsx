@@ -5,7 +5,7 @@ import * as Dialog from "@radix-ui/react-dialog";
 import logoImg from "../../assets/logo.svg";
 import imageCamiseta from "../../assets/camisetas/1.png";
 
-// import { Button } from "../Button";
+import { Button } from "../Button";
 
 import {
   HeaderContainer,
@@ -17,6 +17,8 @@ import {
   ListProductsContainer,
   ImageContainer,
   ProductDetails,
+  ContentQuantity,
+  ContentValueTotal,
 } from "./styles";
 
 export function Header() {
@@ -86,9 +88,33 @@ export function Header() {
                 <button>Remover</button>
               </ProductDetails>
             </li>
+
+            <li>
+              <ImageContainer>
+                <Image src={imageCamiseta} width={94} height={94} alt="" />
+              </ImageContainer>
+
+              <ProductDetails>
+                <span>Camiseta Beyond the Limits</span>
+
+                <strong>R$ 79,90</strong>
+
+                <button>Remover</button>
+              </ProductDetails>
+            </li>
           </ListProductsContainer>
 
-          {/* <Button label="Finalizar compra" /> */}
+          <ContentQuantity>
+            <span>Quantidade</span>
+            <span>3 itens</span>
+          </ContentQuantity>
+
+          <ContentValueTotal>
+            <span>Valor total</span>
+            <span>R$ 270,00</span>
+          </ContentValueTotal>
+
+          <Button label="Finalizar compra" />
         </DialogContent>
       </Dialog.Portal>
     </Dialog.Root>

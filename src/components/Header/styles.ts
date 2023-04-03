@@ -59,12 +59,14 @@ export const DialogOverlay = styled(Dialog.Overlay, {
 export const DialogContent = styled(Dialog.Content, {
   backgroundColor: "$gray800",
   minWidth: 480,
-  height: "100vh",
   padding: "3rem",
+  display: "flex",
+  flexDirection: "column",
 
   position: "absolute",
   top: 0,
   right: 0,
+  bottom: 0,
 });
 
 export const DialogClose = styled(Dialog.Close, {
@@ -84,6 +86,7 @@ export const DialogTitle = styled(Dialog.Title, {
 
 export const ListProductsContainer = styled("ul", {
   listStyle: "none",
+  margin: "2rem 0",
 
   li: {
     display: "flex",
@@ -93,13 +96,22 @@ export const ListProductsContainer = styled("ul", {
       marginBottom: "1.5rem",
     },
   },
+
+  variants: {
+    haveScroll: {
+      true: {
+        overflowY: "scroll",
+        height: "100%",
+      },
+    },
+  },
 });
 
 export const ImageContainer = styled("div", {
   maxWidth: 100,
   width: "100%",
   height: 100,
-  background: "linear-gradient(180deg, #1ea483 0%, #7465d4 100%)",
+  background: "$gradient-images",
   borderRadius: 8,
 
   display: "flex",
@@ -136,5 +148,37 @@ export const ProductDetails = styled("div", {
     color: "$green500",
     fontSize: "1rem",
     fontWeight: "bold",
+
+    "&:hover": {
+      color: "$green300",
+    },
+  },
+});
+
+export const ContentQuantity = styled("div", {
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+  marginTop: "auto",
+
+  span: {
+    fontSize: "1rem",
+    color: "$gray300",
+  },
+});
+
+export const ContentValueTotal = styled("div", {
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+  margin: "0.5rem 0 3.625rem",
+
+  span: {
+    fontSize: "$md",
+    color: "$gray100",
+
+    "&:last-child": {
+      fontSize: "$xl",
+    },
   },
 });

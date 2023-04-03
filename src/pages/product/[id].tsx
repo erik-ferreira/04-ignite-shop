@@ -103,6 +103,7 @@ export default function Product({
             disabled={isCreatingCheckoutSession}
             onClick={handleBuyProduct}
             label="Comprar agora"
+            hasMarginAuto
           />
         </ProductDetails>
       </ProductContainer>

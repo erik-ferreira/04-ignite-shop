@@ -1,8 +1,8 @@
+import type * as Stitches from "@stitches/react";
 import { styled } from "../../styles";
 
 export const ButtonContainer = styled("button", {
-  // width: "100%",
-  marginTop: "auto",
+  width: "100%",
   backgroundColor: "$green500",
   border: 0,
   borderRadius: 8,
@@ -19,4 +19,16 @@ export const ButtonContainer = styled("button", {
   "&:disabled": {
     opacity: 0.6,
   },
+
+  variants: {
+    hasMarginAuto: {
+      true: {
+        marginTop: "auto",
+      },
+    },
+  },
 });
+
+export type ButtonContainerVariants = Stitches.VariantProps<
+  typeof ButtonContainer
+>;
