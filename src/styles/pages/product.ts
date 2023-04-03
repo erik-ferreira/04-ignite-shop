@@ -83,26 +83,6 @@ export const ProductDetails = styled("div", {
     color: "$gray300",
   },
 
-  button: {
-    marginTop: "auto",
-    backgroundColor: "$green500",
-    border: 0,
-    borderRadius: 8,
-    color: "$white",
-    padding: "1.25rem",
-    fontSize: "$md",
-    fontWeight: "bold",
-    transition: "backgroundColor 0.2s",
-
-    "&:not(:disabled):hover": {
-      backgroundColor: "$green300",
-    },
-
-    "&:disabled": {
-      opacity: 0.6,
-    },
-  },
-
   "@media screen and (max-width: 940px)": {
     "h1, span": {
       fontSize: "$xl",

@@ -8,6 +8,8 @@ import { GetStaticPaths, GetStaticProps } from "next";
 
 import { stripe } from "../../lib/stripe";
 
+import { Button } from "../../components/Button";
+
 import {
   ImageContainer,
   ProductContainer,
@@ -97,12 +99,11 @@ export default function Product({
 
           <p>{product.description}</p>
 
-          <button
+          <Button
             disabled={isCreatingCheckoutSession}
             onClick={handleBuyProduct}
-          >
-            Comprar agora
-          </button>
+            label="Comprar agora"
+          />
         </ProductDetails>
       </ProductContainer>
     </>
