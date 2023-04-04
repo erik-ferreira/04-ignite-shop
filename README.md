@@ -4,7 +4,11 @@
 
 ## :computer: Projeto
 
-Este é um projeto feito durante o Projeto 04 do Ignite da Rocketseat, onde pude construir uma conexão com stripe para buscar os produtos(camisetas) e realizar o checkout de pagamento.
+Este é um projeto feito durante o Projeto 04 do Ignite da Rocketseat, onde pude construir uma conexão com stripe para buscar os produtos(camisetas) e realizar o checkout de pagamento. De início foi um projeto de aprendizado, e posteriormente virou um desafio com algumas funcionalidades, como por exemplo:
+
+- Criar fluxo de carrinho
+- Fazer o checkout de pagamento de mais de um produto com o stripe
+- Mudanças no layout
 
 ## :rocket: Tecnologias
 
