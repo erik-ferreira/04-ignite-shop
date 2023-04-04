@@ -77,7 +77,7 @@ export default function Home({ products }: HomeProps) {
               <FooterProduct>
                 <div>
                   <strong>{product.name}</strong>
-                  <span>{product.price}</span>
+                  <span>{product.priceFormatted}</span>
                 </div>
 
                 <ButtonCart
@@ -106,9 +106,9 @@ export const getStaticProps: GetStaticProps = async () => {
     expand: ["data.default_price"],
   });
 
-  const products = response.data.map((product) => {
+  const products: ProductProps[] = response.data.map((product) => {
     const defaultPrice = product.default_price as Stripe.Price;
-    const price = new Intl.NumberFormat("pt-BR", {
+    const priceFormatted = new Intl.NumberFormat("pt-BR", {
       style: "currency",
       currency: "BRL",
     }).format(defaultPrice.unit_amount / 100);
@@ -117,7 +117,8 @@ export const getStaticProps: GetStaticProps = async () => {
       id: product.id,
       name: product.name,
       imageUrl: product.images[0],
-      price,
+      priceFormatted,
+      price: defaultPrice.unit_amount,
     };
   });
 

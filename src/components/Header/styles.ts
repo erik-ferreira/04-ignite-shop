@@ -27,7 +27,7 @@ export const ButtonCart = styled("button", {
     right: -10,
 
     width: "1.5rem",
-    // height: "1.5rem",
+    height: "1.5rem",
     background: "$green500",
     borderRadius: "50%",
     display: "flex",

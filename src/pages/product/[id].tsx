@@ -92,7 +92,7 @@ export default function Product({
 
         <ProductDetails>
           <h1>{product.name}</h1>
-          <span>{product.price}</span>
+          <span>{product.priceFormatted}</span>
 
           <p>{product.description}</p>
 
@@ -119,7 +119,6 @@ export const getStaticProps: GetStaticProps<any, { id: string }> = async ({
   params,
 }) => {
   let product = {} as Product;
-  console.log("params", params);
 
   try {
     const productId = params.id;
@@ -129,7 +128,7 @@ export const getStaticProps: GetStaticProps<any, { id: string }> = async ({
     });
 
     const defaultPrice = productStripe.default_price as Stripe.Price;
-    const price = new Intl.NumberFormat("pt-BR", {
+    const priceFormatted = new Intl.NumberFormat("pt-BR", {
       style: "currency",
       currency: "BRL",
     }).format(defaultPrice.unit_amount / 100);
@@ -138,7 +137,8 @@ export const getStaticProps: GetStaticProps<any, { id: string }> = async ({
       id: productStripe.id,
       name: productStripe.name,
       imageUrl: productStripe.images[0],
-      price,
+      price: defaultPrice.unit_amount,
+      priceFormatted,
       defaultPriceId: defaultPrice.id,
       description: productStripe.description,
     };

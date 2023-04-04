@@ -4,9 +4,10 @@ import { Handbag, X } from "phosphor-react";
 import * as Dialog from "@radix-ui/react-dialog";
 
 import logoImg from "../../assets/logo.svg";
-import imageCamiseta from "../../assets/camisetas/1.png";
 
 import { Button } from "../Button";
+
+import { useCart } from "../../contexts/CartContext";
 
 import {
   HeaderContainer,
@@ -23,7 +24,8 @@ import {
 } from "./styles";
 
 export function Header() {
-  const hasProductInCart = false;
+  const { cart } = useCart();
+  const totalProductsInCart = cart.length;
 
   return (
     <Dialog.Root>
@@ -33,8 +35,8 @@ export function Header() {
         </Link>
 
         <Dialog.Trigger asChild>
-          <ButtonCart type="button" hasProductInCart={false}>
-            {hasProductInCart && <span>1</span>}
+          <ButtonCart type="button" hasProductInCart={totalProductsInCart > 0}>
+            {totalProductsInCart > 0 && <span>{totalProductsInCart}</span>}
             <Handbag size={24} />
           </ButtonCart>
         </Dialog.Trigger>
@@ -50,67 +52,30 @@ export function Header() {
 
           <DialogTitle>Sacola de compras</DialogTitle>
 
-          <ListProductsContainer>
-            <li>
-              <ImageContainer>
-                <Image src={imageCamiseta} width={94} height={94} alt="" />
-              </ImageContainer>
+          <ListProductsContainer haveScroll={totalProductsInCart >= 5}>
+            {cart.map((product) => (
+              <li key={product.id}>
+                <ImageContainer>
+                  <Image src={product.imageUrl} width={94} height={94} alt="" />
+                </ImageContainer>
 
-              <ProductDetails>
-                <span>Camiseta Beyond the Limits</span>
+                <ProductDetails>
+                  <span>{product.name}</span>
+                  <strong>{product.priceFormatted}</strong>
 
-                <strong>R$ 79,90</strong>
-
-                <button>Remover</button>
-              </ProductDetails>
-            </li>
-
-            <li>
-              <ImageContainer>
-                <Image src={imageCamiseta} width={94} height={94} alt="" />
-              </ImageContainer>
-
-              <ProductDetails>
-                <span>Camiseta Beyond the Limits</span>
-
-                <strong>R$ 79,90</strong>
-
-                <button>Remover</button>
-              </ProductDetails>
-            </li>
-
-            <li>
-              <ImageContainer>
-                <Image src={imageCamiseta} width={94} height={94} alt="" />
-              </ImageContainer>
-
-              <ProductDetails>
-                <span>Camiseta Beyond the Limits</span>
-
-                <strong>R$ 79,90</strong>
-
-                <button>Remover</button>
-              </ProductDetails>
-            </li>
-
-            <li>
-              <ImageContainer>
-                <Image src={imageCamiseta} width={94} height={94} alt="" />
-              </ImageContainer>
-
-              <ProductDetails>
-                <span>Camiseta Beyond the Limits</span>
-
-                <strong>R$ 79,90</strong>
-
-                <button>Remover</button>
-              </ProductDetails>
-            </li>
+                  <button>Remover</button>
+                </ProductDetails>
+              </li>
+            ))}
           </ListProductsContainer>
 
           <ContentQuantity>
             <span>Quantidade</span>
-            <span>3 itens</span>
+            <span>
+              {totalProductsInCart === 1
+                ? `${totalProductsInCart} item`
+                : `${totalProductsInCart} itens`}
+            </span>
           </ContentQuantity>
 
           <ContentValueTotal>
