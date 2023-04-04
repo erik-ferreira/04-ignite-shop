@@ -54,6 +54,7 @@ export function Header() {
 
       const { checkoutUrl } = response.data;
 
+      localStorage.removeItem("@ignite-shop:cart-1.0.0");
       window.location.href = checkoutUrl;
     } catch (err) {
       setIsCreatingCheckoutSession(false);
