@@ -1,4 +1,10 @@
-import { createContext, ReactNode, useContext, useState } from "react";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
 import { ProductProps } from "../dtos/product";
 
@@ -18,7 +24,13 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
   const [cart, setCart] = useState<ProductProps[]>([]);
 
   function addProductInCart(product: ProductProps) {
-    setCart((prevState) => [...prevState, product]);
+    const newListProductsInCart = [...cart, product];
+
+    setCart(newListProductsInCart);
+    localStorage.setItem(
+      "@ignite-shop:cart-1.0.0",
+      JSON.stringify(newListProductsInCart)
+    );
   }
 
   function removeProductCart(productId: string) {
@@ -27,7 +39,19 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
     );
 
     setCart(newListProductsInCart);
+    localStorage.setItem(
+      "@ignite-shop:cart-1.0.0",
+      JSON.stringify(newListProductsInCart)
+    );
   }
+
+  useEffect(() => {
+    const storageCart = localStorage.getItem("@ignite-shop:cart-1.0.0");
+
+    if (storageCart) {
+      setCart(JSON.parse(storageCart));
+    }
+  }, []);
 
   return (
     <CartContext.Provider
