@@ -11,6 +11,7 @@ import { ProductProps } from "../dtos/product";
 interface CartContextData {
   cart: ProductProps[];
   addProductInCart: (product: ProductProps) => void;
+  removeProductCart: (productId: string) => void;
 }
 
 export const CartContext = createContext({} as CartContextData);
@@ -26,6 +27,14 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
     setCart((prevState) => [...prevState, product]);
   }
 
+  function removeProductCart(productId: string) {
+    const newListProductsInCart = cart.filter(
+      (product) => product.id !== productId
+    );
+
+    setCart(newListProductsInCart);
+  }
+
   useEffect(() => {
     console.log("cart", cart);
   }, [cart]);
@@ -35,6 +44,7 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
       value={{
         cart,
         addProductInCart,
+        removeProductCart,
       }}
     >
       {children}

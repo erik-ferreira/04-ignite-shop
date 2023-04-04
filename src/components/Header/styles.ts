@@ -26,8 +26,6 @@ export const ButtonCart = styled("button", {
     top: -10,
     right: -10,
 
-    width: "1.5rem",
-    height: "1.5rem",
     background: "$green500",
     borderRadius: "50%",
     display: "flex",
@@ -36,6 +34,7 @@ export const ButtonCart = styled("button", {
 
     color: "$white",
     fontSize: "$sm",
+    padding: "0.75rem 0.5rem",
     fontWeight: "bold",
     border: "3px solid $gray900",
   },

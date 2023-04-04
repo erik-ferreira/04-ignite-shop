@@ -24,8 +24,17 @@ import {
 } from "./styles";
 
 export function Header() {
-  const { cart } = useCart();
+  const { cart, removeProductCart } = useCart();
   const totalProductsInCart = cart.length;
+  const sumCentsPrice = cart.reduce((acc, product) => acc + product.price, 0);
+  const totalPriceProducts = new Intl.NumberFormat("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  }).format(sumCentsPrice / 100);
+
+  function handleRemoveProduct(productId: string) {
+    removeProductCart(productId);
+  }
 
   return (
     <Dialog.Root>
@@ -63,7 +72,12 @@ export function Header() {
                   <span>{product.name}</span>
                   <strong>{product.priceFormatted}</strong>
 
-                  <button>Remover</button>
+                  <button
+                    type="button"
+                    onClick={() => handleRemoveProduct(product.id)}
+                  >
+                    Remover
+                  </button>
                 </ProductDetails>
               </li>
             ))}
@@ -80,7 +94,7 @@ export function Header() {
 
           <ContentValueTotal>
             <span>Valor total</span>
-            <span>R$ 270,00</span>
+            <span>{totalPriceProducts}</span>
           </ContentValueTotal>
 
           <Button label="Finalizar compra" />
