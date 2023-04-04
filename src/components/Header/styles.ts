@@ -83,6 +83,12 @@ export const DialogTitle = styled(Dialog.Title, {
   color: "$gray100",
 });
 
+export const MessageCartEmpty = styled("span", {
+  marginTop: "2rem",
+  color: "$gray300",
+  fontSize: "$lg",
+});
+
 export const ListProductsContainer = styled("ul", {
   listStyle: "none",
   margin: "2rem 0",

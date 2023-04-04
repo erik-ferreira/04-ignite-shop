@@ -1,5 +1,7 @@
+import axios from "axios";
 import Link from "next/link";
 import Image from "next/image";
+import { useState } from "react";
 import { Handbag, X } from "phosphor-react";
 import * as Dialog from "@radix-ui/react-dialog";
 
@@ -17,6 +19,7 @@ import {
   DialogClose,
   DialogTitle,
   ListProductsContainer,
+  MessageCartEmpty,
   ImageContainer,
   ProductDetails,
   ContentQuantity,
@@ -25,6 +28,7 @@ import {
 
 export function Header() {
   const { cart, removeProductCart } = useCart();
+
   const totalProductsInCart = cart.length;
   const sumCentsPrice = cart.reduce((acc, product) => acc + product.price, 0);
   const totalPriceProducts = new Intl.NumberFormat("pt-BR", {
@@ -32,8 +36,29 @@ export function Header() {
     currency: "BRL",
   }).format(sumCentsPrice / 100);
 
+  const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] =
+    useState(false);
+
   function handleRemoveProduct(productId: string) {
     removeProductCart(productId);
+  }
+
+  async function handleBuyProduct() {
+    try {
+      setIsCreatingCheckoutSession(true);
+      const listPricesIds = cart.map((product) => product.defaultPriceId);
+
+      const response = await axios.post("/api/checkout", {
+        listPricesIds,
+      });
+
+      const { checkoutUrl } = response.data;
+
+      window.location.href = checkoutUrl;
+    } catch (err) {
+      setIsCreatingCheckoutSession(false);
+      alert("Falhar ao redirecionar ao checkout");
+    }
   }
 
   return (
@@ -61,27 +86,38 @@ export function Header() {
 
           <DialogTitle>Sacola de compras</DialogTitle>
 
-          <ListProductsContainer haveScroll={totalProductsInCart >= 5}>
-            {cart.map((product) => (
-              <li key={product.id}>
-                <ImageContainer>
-                  <Image src={product.imageUrl} width={94} height={94} alt="" />
-                </ImageContainer>
+          {totalProductsInCart === 0 ? (
+            <MessageCartEmpty>
+              O seu carrinho está vazio. Adicione alguns produtos!
+            </MessageCartEmpty>
+          ) : (
+            <ListProductsContainer haveScroll={totalProductsInCart >= 5}>
+              {cart.map((product) => (
+                <li key={product.id}>
+                  <ImageContainer>
+                    <Image
+                      src={product.imageUrl}
+                      width={94}
+                      height={94}
+                      alt=""
+                    />
+                  </ImageContainer>
 
-                <ProductDetails>
-                  <span>{product.name}</span>
-                  <strong>{product.priceFormatted}</strong>
+                  <ProductDetails>
+                    <span>{product.name}</span>
+                    <strong>{product.priceFormatted}</strong>
 
-                  <button
-                    type="button"
-                    onClick={() => handleRemoveProduct(product.id)}
-                  >
-                    Remover
-                  </button>
-                </ProductDetails>
-              </li>
-            ))}
-          </ListProductsContainer>
+                    <button
+                      type="button"
+                      onClick={() => handleRemoveProduct(product.id)}
+                    >
+                      Remover
+                    </button>
+                  </ProductDetails>
+                </li>
+              ))}
+            </ListProductsContainer>
+          )}
 
           <ContentQuantity>
             <span>Quantidade</span>
@@ -97,7 +133,11 @@ export function Header() {
             <span>{totalPriceProducts}</span>
           </ContentValueTotal>
 
-          <Button label="Finalizar compra" />
+          <Button
+            label="Finalizar compra"
+            disabled={totalProductsInCart <= 0 || isCreatingCheckoutSession}
+            onClick={handleBuyProduct}
+          />
         </DialogContent>
       </Dialog.Portal>
     </Dialog.Root>

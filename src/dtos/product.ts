@@ -4,4 +4,5 @@ export interface ProductProps {
   imageUrl: string;
   price: number;
   priceFormatted: string;
+  defaultPriceId: string;
 }

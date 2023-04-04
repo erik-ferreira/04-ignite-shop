@@ -1,8 +1,6 @@
-import axios from "axios";
 import Stripe from "stripe";
 import Head from "next/head";
 import Image from "next/image";
-import { useState } from "react";
 import { useRouter } from "next/router";
 import { GetStaticPaths, GetStaticProps } from "next";
 
@@ -10,6 +8,8 @@ import { stripe } from "../../lib/stripe";
 import { ProductProps } from "../../dtos/product";
 
 import { Button } from "../../components/Button";
+
+import { useCart } from "../../contexts/CartContext";
 
 import {
   ImageContainer,
@@ -34,23 +34,13 @@ export default function Product({
   productNotFound,
 }: ProductPageProps) {
   const { isFallback } = useRouter();
-  const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] =
-    useState(false);
+  const { addProductInCart, cart } = useCart();
+  const productAlreadyExistsInCart = cart.find(
+    (productInCart) => productInCart.id === product.id
+  );
 
-  async function handleBuyProduct() {
-    try {
-      setIsCreatingCheckoutSession(true);
-      const response = await axios.post("/api/checkout", {
-        priceId: product.defaultPriceId,
-      });
-
-      const { checkoutUrl } = response.data;
-
-      window.location.href = checkoutUrl;
-    } catch (err) {
-      setIsCreatingCheckoutSession(false);
-      alert("Falhar ao redirecionar ao checkout");
-    }
+  function handleAddProductInCart() {
+    addProductInCart(product);
   }
 
   if (isFallback) {
@@ -97,8 +87,8 @@ export default function Product({
           <p>{product.description}</p>
 
           <Button
-            disabled={isCreatingCheckoutSession}
-            onClick={handleBuyProduct}
+            disabled={!!productAlreadyExistsInCart}
+            onClick={handleAddProductInCart}
             label="Colocar na sacola"
             hasMarginAuto
           />

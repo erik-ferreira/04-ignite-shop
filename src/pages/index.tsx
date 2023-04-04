@@ -119,6 +119,7 @@ export const getStaticProps: GetStaticProps = async () => {
       imageUrl: product.images[0],
       priceFormatted,
       price: defaultPrice.unit_amount,
+      defaultPriceId: defaultPrice.id,
     };
   });
 

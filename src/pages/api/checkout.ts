@@ -6,14 +6,14 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { priceId } = req.body;
+  const { listPricesIds } = req.body as { listPricesIds: string[] };
 
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  if (!priceId) {
-    return res.status(400).json({ error: "Price id not found" });
+  if (!listPricesIds || listPricesIds.length === 0) {
+    return res.status(400).json({ error: "Prices ids not found" });
   }
 
   const success_url = `${process.env.NEXT_URL}/success?session_id={CHECKOUT_SESSION_ID}`;
@@ -23,12 +23,7 @@ export default async function handler(
     mode: "payment",
     success_url,
     cancel_url,
-    line_items: [
-      {
-        price: priceId,
-        quantity: 1,
-      },
-    ],
+    line_items: listPricesIds.map((price) => ({ price, quantity: 1 })),
   });
 
   return res.status(201).json({ checkoutUrl: checkoutSession.url });
