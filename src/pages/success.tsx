@@ -6,7 +6,11 @@ import { GetServerSideProps } from "next";
 
 import { stripe } from "../lib/stripe";
 
-import { ImageContainer, SuccessContainer } from "../styles/pages/success";
+import {
+  ImageContainer,
+  ImageContent,
+  SuccessContainer,
+} from "../styles/pages/success";
 
 interface SuccessProps {
   customerName: string;
@@ -15,7 +19,7 @@ interface SuccessProps {
     imageUrl: string;
   };
 }
-// http://localhost:3000/success?session_id=cs_test_a1f1fzWMITx8FCTpJ8Gd8AjgR8TsLtaZr8qFQcEjkFg26s9jadrr97xdzn
+
 export default function Success({ customerName, product }: SuccessProps) {
   return (
     <>
@@ -26,11 +30,25 @@ export default function Success({ customerName, product }: SuccessProps) {
       </Head>
 
       <SuccessContainer>
-        <h1>Compra efetuada</h1>
-
         <ImageContainer>
-          <Image src={product.imageUrl} alt="" width={120} height={110} />
+          <ImageContent>
+            <Image src={product.imageUrl} alt="" width={130} height={130} />
+          </ImageContent>
+          <ImageContent>
+            <Image src={product.imageUrl} alt="" width={130} height={130} />
+          </ImageContent>
+          <ImageContent>
+            <Image src={product.imageUrl} alt="" width={130} height={130} />
+          </ImageContent>
+          <ImageContent>
+            <Image src={product.imageUrl} alt="" width={130} height={130} />
+          </ImageContent>
+          <ImageContent>
+            <Image src={product.imageUrl} alt="" width={130} height={130} />
+          </ImageContent>
         </ImageContainer>
+
+        <h1>Compra efetuada</h1>
 
         <p>
           Uhuul <strong>{customerName}</strong>, sua{" "}

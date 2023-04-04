@@ -13,6 +13,7 @@ export const SuccessContainer = styled("main", {
   h1: {
     fontSize: "$2xl",
     color: "$gray100",
+    margin: "3rem 0 1.5rem",
   },
 
   p: {
@@ -21,12 +22,11 @@ export const SuccessContainer = styled("main", {
     color: "$gray300",
     textAlign: "center",
     lineHeight: 1.4,
-    marginTop: "2rem",
   },
 
   a: {
     display: "block",
-    marginTop: "5rem",
+    marginTop: "4rem",
     fontSize: "$lg",
     fontWeight: "bold",
     color: "$green500",
@@ -53,13 +53,19 @@ export const SuccessContainer = styled("main", {
 });
 
 export const ImageContainer = styled("div", {
-  maxWidth: 130,
+  display: "flex",
+});
+
+export const ImageContent = styled("div", {
+  maxWidth: 140,
   width: "100%",
-  height: 145,
+  height: 140,
   background: "$gradient-images",
-  borderRadius: 8,
+  borderRadius: "50%",
+
   padding: "0.25rem",
-  marginTop: "4rem",
+  margin: "0 -25px",
+  boxShadow: "0px 0px 60px rgba(0, 0, 0, 0.8)",
 
   display: "flex",
   alignItems: "center",
