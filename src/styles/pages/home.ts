@@ -96,12 +96,16 @@ export const FooterProduct = styled("footer", {
     color: "$green300",
   },
 
-  "@media screen and (max-width: 950px)": {
+  "@media screen and (max-width: 1000px)": {
     flexDirection: "column",
     gap: "1rem",
     padding: "1rem",
 
     strong: {
+      textAlign: "center",
+    },
+
+    span: {
       textAlign: "center",
     },
   },
@@ -122,5 +126,13 @@ export const ButtonCart = styled("button", {
 
   "&:disabled": {
     opacity: 0.6,
+  },
+
+  "@media screen and (max-width: 1400px)": {
+    padding: "0.5rem",
+    svg: {
+      width: 24,
+      height: 24,
+    },
   },
 });

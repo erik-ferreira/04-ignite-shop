@@ -57,7 +57,7 @@ export const DialogOverlay = styled(Dialog.Overlay, {
 
 export const DialogContent = styled(Dialog.Content, {
   backgroundColor: "$gray800",
-  minWidth: 480,
+  width: "30rem",
   padding: "3rem",
   display: "flex",
   flexDirection: "column",
@@ -66,6 +66,19 @@ export const DialogContent = styled(Dialog.Content, {
   top: 0,
   right: 0,
   bottom: 0,
+
+  "@media screen and (max-width: 1150px)": {
+    width: "25rem",
+  },
+
+  "@media screen and (max-width: 900px)": {
+    width: "20rem",
+  },
+
+  "@media screen and (max-width: 600px)": {
+    width: "auto",
+    left: 0,
+  },
 });
 
 export const DialogClose = styled(Dialog.Close, {
