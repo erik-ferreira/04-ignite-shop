@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import { GetStaticPaths, GetStaticProps } from "next";
 
 import { stripe } from "../../lib/stripe";
+import { ProductProps } from "../../dtos/product";
 
 import { Button } from "../../components/Button";
 
@@ -18,17 +19,13 @@ import {
   ProductSkeletonDetails,
 } from "../../styles/pages/product";
 
-interface ProductProps {
-  id: string;
-  name: string;
-  imageUrl: string;
-  price: string;
+interface Product extends ProductProps {
   description: string;
   defaultPriceId: string;
 }
 
 interface ProductPageProps {
-  product: ProductProps;
+  product: Product;
   productNotFound: boolean;
 }
 
@@ -102,7 +99,7 @@ export default function Product({
           <Button
             disabled={isCreatingCheckoutSession}
             onClick={handleBuyProduct}
-            label="Comprar agora"
+            label="Colocar na sacola"
             hasMarginAuto
           />
         </ProductDetails>
@@ -121,7 +118,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps<any, { id: string }> = async ({
   params,
 }) => {
-  let product = {} as ProductProps;
+  let product = {} as Product;
   console.log("params", params);
 
   try {

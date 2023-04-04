@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Image from "next/image";
 import { Handbag, X } from "phosphor-react";
 import * as Dialog from "@radix-ui/react-dialog";
@@ -27,7 +28,10 @@ export function Header() {
   return (
     <Dialog.Root>
       <HeaderContainer>
-        <Image src={logoImg} alt="" />
+        <Link href="/">
+          <Image src={logoImg} alt="" />
+        </Link>
+
         <Dialog.Trigger asChild>
           <ButtonCart type="button" hasProductInCart={false}>
             {hasProductInCart && <span>1</span>}

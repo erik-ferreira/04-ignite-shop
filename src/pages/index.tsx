@@ -1,11 +1,15 @@
 import Stripe from "stripe";
 import Head from "next/head";
 import Image from "next/image";
+import { FormEvent } from "react";
 import { GetStaticProps } from "next";
 import { Handbag } from "phosphor-react";
 import { useKeenSlider } from "keen-slider/react";
 
 import { stripe } from "../lib/stripe";
+import { ProductProps } from "../dtos/product";
+
+import { useCart } from "../contexts/CartContext";
 
 import "keen-slider/keen-slider.min.css";
 import {
@@ -15,18 +19,13 @@ import {
   ButtonCart,
 } from "../styles/pages/home";
 
-interface ProductProps {
-  id: string;
-  name: string;
-  imageUrl: string;
-  price: string;
-}
-
 interface HomeProps {
   products: ProductProps[];
 }
 
 export default function Home({ products }: HomeProps) {
+  const { cart, addProductInCart } = useCart();
+
   const [sliderRef] = useKeenSlider({
     slides: {
       perView: 3,
@@ -48,6 +47,12 @@ export default function Home({ products }: HomeProps) {
     },
   });
 
+  function handleAddProductInCart(event: FormEvent, product: ProductProps) {
+    event.preventDefault();
+
+    addProductInCart(product);
+  }
+
   return (
     <>
       <Head>
@@ -55,27 +60,42 @@ export default function Home({ products }: HomeProps) {
       </Head>
 
       <HomeContainer ref={sliderRef} className="keen-slider">
-        {products.map((product, index) => (
-          <Product
-            key={product.id}
-            prefetch={false}
-            href={`/product/${product.id}`}
-            className="keen-slider__slide"
-          >
-            <Image src={product.imageUrl} width={520} height={480} alt="" />
+        {products.map((product) => {
+          const productAlreadyExistsInCart = cart.find(
+            (productInCart) => productInCart.id === product.id
+          );
 
-            <FooterProduct>
-              <div>
-                <strong>{product.name}</strong>
-                <span>{product.price}</span>
-              </div>
+          return (
+            <Product
+              key={product.id}
+              prefetch={false}
+              href={`/product/${product.id}`}
+              className="keen-slider__slide"
+            >
+              <Image src={product.imageUrl} width={520} height={480} alt="" />
 
-              <ButtonCart type="button">
-                <Handbag size={32} weight="bold" />
-              </ButtonCart>
-            </FooterProduct>
-          </Product>
-        ))}
+              <FooterProduct>
+                <div>
+                  <strong>{product.name}</strong>
+                  <span>{product.price}</span>
+                </div>
+
+                <ButtonCart
+                  type="button"
+                  onClick={(event) => handleAddProductInCart(event, product)}
+                  disabled={!!productAlreadyExistsInCart}
+                  title={
+                    !!productAlreadyExistsInCart
+                      ? "Produto já está no carrinho"
+                      : "Adicionar produto no carrinho"
+                  }
+                >
+                  <Handbag size={32} weight="bold" />
+                </ButtonCart>
+              </FooterProduct>
+            </Product>
+          );
+        })}
       </HomeContainer>
     </>
   );
